@@ -23,6 +23,18 @@ class Movies extends Component {
                 <th scope='col'>Rate</th>
               </tr>
             </thead>
+            <tbody>
+              {this.state.movies.map((m) => {
+                return (
+                <tr key={m._id}>
+                  <td>{m.title}</td>
+                  <td>{m.genre.name}</td>
+                  <td>{m.numberInStock}</td>
+                  <td>{m.dailyRentalRate}</td>
+                </tr>
+                )
+              })}
+            </tbody>
           </table>
         </main>
       </div>
