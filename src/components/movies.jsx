@@ -1,16 +1,20 @@
-import React, { Component } from 'react';
-import { getMovies } from '../services/fakeMovieService.js'
+import React, { Component } from "react";
+import { getMovies } from "../services/fakeMovieService.js";
 
 class Movies extends Component {
-    state = {
-        movies: getMovies()
-    };
+  state = {
+    movies: getMovies(),
+  };
 
-    render() { 
-        return (<div>
-            <h1>Movies</h1>
-        </div>);
-    }
+  render() {
+    return (
+      <div>
+        <main className="container">
+          <h1>Movies</h1>
+        </main>
+      </div>
+    );
+  }
 }
- 
+
 export default Movies;
