@@ -11,6 +11,8 @@ class Movies extends Component {
       <div>
         <main className="container">
           <h1>Movies</h1>
+
+          <p>Showing {this.state.movies.length} movies from the database</p>
         </main>
       </div>
     );
