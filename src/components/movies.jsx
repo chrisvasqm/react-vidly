@@ -31,17 +31,19 @@ class Movies extends Component {
               <th scope="col">Genre</th>
               <th scope="col">Stock</th>
               <th scope="col">Rate</th>
+              <th scope="col">Liked</th>
               <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map((m) => {
+            {this.state.movies.map(m => {
               return (
                 <tr key={m._id}>
                   <td>{m.title}</td>
                   <td>{m.genre.name}</td>
                   <td>{m.numberInStock}</td>
                   <td>{m.dailyRentalRate}</td>
+                  <td>{m.isLiked ? 'liked' : 'disliked'}</td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm m-2"
@@ -62,7 +64,7 @@ class Movies extends Component {
   }
 
   handleDelete(id) {
-    const movies = this.state.movies.filter((m) => m._id !== id);
+    const movies = this.state.movies.filter(m => m._id !== id);
     this.setState({ movies });
   }
 }
