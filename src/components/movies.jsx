@@ -43,7 +43,12 @@ class Movies extends Component {
                   <td>{m.genre.name}</td>
                   <td>{m.numberInStock}</td>
                   <td>{m.dailyRentalRate}</td>
-                  <td>{m.isLiked ? 'liked' : 'disliked'}</td>
+                  <td>
+                    <i
+                      className={this.renderHeartIcon(m)}
+                      aria-hidden="true"
+                    ></i>
+                  </td>
                   <td>
                     <button
                       className="btn btn-danger btn-sm m-2"
@@ -66,6 +71,13 @@ class Movies extends Component {
   handleDelete(id) {
     const movies = this.state.movies.filter(m => m._id !== id);
     this.setState({ movies });
+  }
+
+  renderHeartIcon(movie) {
+    let iconClasses = "fa fa-heart";
+    if (!movie.isLiked) iconClasses += "-o";
+
+    return iconClasses;
   }
 }
 
