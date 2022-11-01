@@ -47,6 +47,9 @@ class Movies extends Component {
                     <i
                       className={this.renderHeartIcon(m)}
                       aria-hidden="true"
+                      onClick={() => {
+                        this.handleLike(m);
+                      }}
                     ></i>
                   </td>
                   <td>
@@ -78,6 +81,15 @@ class Movies extends Component {
     if (!movie.isLiked) iconClasses += "-o";
 
     return iconClasses;
+  }
+
+  handleLike(movie) {
+    const movies = [...this.state.movies];
+    const index = movies.indexOf(movie);
+    movies[index] = { ...movie };
+    movies[index].isLiked = !movie.isLiked;
+
+    this.setState({ movies });
   }
 }
 
