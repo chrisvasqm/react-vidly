@@ -2,9 +2,7 @@ import _ from "lodash";
 
 const Pagination = props => {
   const { itemsCount, pageSize } = props;
-  const pagesCount = Math.ceil(itemsCount / pageSize);
-  if (pagesCount === 1) return null;
-  const pages = _.range(1, pagesCount + 1);
+  const pages = getPages(itemsCount, pageSize);
 
   return (
     <nav aria-label="Page navigation example">
@@ -19,6 +17,13 @@ const Pagination = props => {
       </ul>
     </nav>
   );
+
+  function getPages(itemsCount, pageSize) {
+    const count = Math.ceil(itemsCount / pageSize);
+    if (count === 1) return null;
+
+    return _.range(1, count + 1);
+  }
 };
 
 export default Pagination;
