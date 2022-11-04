@@ -19,8 +19,8 @@ class Movies extends Component {
   }
 
   renderMovies() {
-    const isEmpty = this.state.movies.length === 0;
-    if (isEmpty) return <p>There are no movies in the database</p>;
+    const hasNoMovies = this.state.movies.length === 0;
+    if (hasNoMovies) return <p>There are no movies in the database</p>;
 
     return (
       <React.Fragment>
