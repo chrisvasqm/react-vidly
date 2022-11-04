@@ -20,7 +20,7 @@ const Pagination = props => {
 
   function getPages(itemsCount, pageSize) {
     const count = Math.ceil(itemsCount / pageSize);
-    if (count === 1) return null;
+    if (count === 1) return [];
 
     return _.range(1, count + 1);
   }
