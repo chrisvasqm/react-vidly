@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService.js";
-import Like from "./common/like.jsx";
-import Pagination from "./common/pagination.jsx";
+import React, { Component } from 'react';
+import { getMovies } from '../services/fakeMovieService.js';
+import Like from './common/like.jsx';
+import Pagination from './common/pagination.jsx';
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
-    pageSize: 4,
+    pageSize: 4
   };
 
   render() {
     return (
-      <main className="container">
+      <main className='container'>
         <h1>Movies</h1>
 
         {this.renderMovies()}
@@ -28,15 +28,15 @@ class Movies extends Component {
       <React.Fragment>
         <p>Showing {count} movies from the database</p>
 
-        <table className="table">
+        <table className='table'>
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Genre</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Rate</th>
-              <th scope="col">Liked</th>
-              <th scope="col"></th>
+              <th scope='col'>Title</th>
+              <th scope='col'>Genre</th>
+              <th scope='col'>Stock</th>
+              <th scope='col'>Rate</th>
+              <th scope='col'>Liked</th>
+              <th scope='col'></th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +57,7 @@ class Movies extends Component {
                   </td>
                   <td>
                     <button
-                      className="btn btn-danger btn-sm m-2"
+                      className='btn btn-danger btn-sm m-2'
                       onClick={() => {
                         this.handleDelete(movie._id);
                       }}
