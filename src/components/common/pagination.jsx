@@ -1,16 +1,17 @@
-import _ from "lodash";
+import _ from 'lodash';
 
-const Pagination = props => {
-  const { itemsCount, pageSize } = props;
+const Pagination = ({ itemsCount, pageSize, onPageChanged }) => {
   const pages = getPages(itemsCount, pageSize);
 
   return (
-    <nav aria-label="Page navigation example">
-      <ul className="pagination">
+    <nav aria-label='Page navigation example'>
+      <ul className='pagination'>
         {pages.map(page => {
           return (
-            <li key={page} className="page-item">
-              <a className="page-link">{page}</a>
+            <li key={page} className='page-item'>
+              <a className='page-link' href='#' onClick={() => onPageChanged(page)}>
+                {page}
+              </a>
             </li>
           );
         })}
