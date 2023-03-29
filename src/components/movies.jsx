@@ -3,12 +3,15 @@ import { getMovies } from '../services/fakeMovieService.js';
 import Like from './common/Like';
 import Pagination from './common/Pagination';
 import paginate from '../utils/paginate.js';
+import GenresListGroup from './GenresListGroup.jsx';
+import { getGenres } from '../services/fakeGenreService.js';
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
     currentPage: 1,
-    pageSize: 4
+    pageSize: 4,
+    selectedGenre: 'All Genres'
   };
 
   render() {
@@ -22,17 +25,25 @@ class Movies extends Component {
   }
 
   renderMovies() {
-    const { movies: allMovies, pageSize, currentPage } = this.state;
-    const count = this.state.movies.length;
+    const { movies: allMovies, pageSize, currentPage, selectedGenre } = this.state;
+    const count = allMovies.length;
     const hasNoMovies = count === 0;
     if (hasNoMovies) return <p>There are no movies in the database</p>;
 
-    const movies = paginate(allMovies, currentPage, pageSize);
+    let movies = paginate(allMovies, currentPage, pageSize);
+
+    if (selectedGenre !== 'All Genres') movies = movies.filter(m => m.genre.name === selectedGenre);
 
     return (
       <React.Fragment>
         <div className='row'>
-          <div className='col-2'>Categories</div>
+          <div className='col-2'>
+            <GenresListGroup
+              genres={[{ _id: '', name: 'All Genres' }, ...getGenres()]}
+              selectedGenre={selectedGenre}
+              onSelectGenre={genre => this.setState({ selectedGenre: genre.name })}
+            />
+          </div>
           <div className='col'>
             <p>Showing {count} movies from the database</p>
 
