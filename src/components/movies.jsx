@@ -8,11 +8,18 @@ import { getGenres } from '../services/fakeGenreService.js';
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
     currentPage: 1,
     pageSize: 4,
-    selectedGenre: 'All Genres'
+    genres: [],
+    selectedGenre: {}
   };
+
+  componentDidMount() {
+    const genres = [{ name: 'All Genres' }, ...getGenres()];
+
+    this.setState({ movies: getMovies(), genres: genres });
+  }
 
   render() {
     return (
@@ -25,27 +32,27 @@ class Movies extends Component {
   }
 
   renderMovies() {
-    const { movies: allMovies, pageSize, currentPage, selectedGenre } = this.state;
+    const { movies: allMovies, pageSize, currentPage, genres, selectedGenre } = this.state;
     const count = allMovies.length;
     const hasNoMovies = count === 0;
     if (hasNoMovies) return <p>There are no movies in the database</p>;
 
-    let movies = paginate(allMovies, currentPage, pageSize);
-
-    if (selectedGenre !== 'All Genres') movies = movies.filter(m => m.genre.name === selectedGenre);
+    const filteredMovies =
+      selectedGenre && selectedGenre._id ? allMovies.filter(m => m.genre._id === selectedGenre._id) : allMovies;
+    const movies = paginate(filteredMovies, currentPage, pageSize);
 
     return (
       <React.Fragment>
         <div className='row'>
           <div className='col-2'>
             <GenresListGroup
-              genres={[{ _id: '', name: 'All Genres' }, ...getGenres()]}
+              genres={genres}
               selectedGenre={selectedGenre}
-              onSelectGenre={genre => this.setState({ selectedGenre: genre.name })}
+              onSelectGenre={genre => this.setState({ selectedGenre: genre, currentPage: 1 })}
             />
           </div>
           <div className='col'>
-            <p>Showing {count} movies from the database</p>
+            <p>Showing {filteredMovies.length} movies from the database</p>
 
             <table className='table'>
               <thead>
@@ -90,7 +97,7 @@ class Movies extends Component {
               </tbody>
             </table>
             <Pagination
-              itemsCount={count}
+              itemsCount={filteredMovies.length}
               pageSize={this.state.pageSize}
               currentPage={this.state.currentPage}
               onPageChanged={this.handlePageChage}
