@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakeMovieService.js';
-import Like from './common/like.jsx';
-import Pagination from './common/pagination.jsx';
+import Like from './common/Like';
+import Pagination from './common/Pagination';
 import paginate from '../utils/paginate.js';
 
 class Movies extends Component {
@@ -30,7 +30,7 @@ class Movies extends Component {
     const movies = paginate(allMovies, currentPage, pageSize);
 
     return (
-      <React.Fragment className='container'>
+      <React.Fragment>
         <div className='row'>
           <div className='col-2'>Categories</div>
           <div className='col'>
