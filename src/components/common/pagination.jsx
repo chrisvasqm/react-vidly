@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const Pagination = ({ itemsCount, pageSize, onPageChanged }) => {
+const Pagination = ({ itemsCount, pageSize, currentPage, onPageChanged }) => {
   const pages = getPages(itemsCount, pageSize);
 
   return (
@@ -8,7 +8,10 @@ const Pagination = ({ itemsCount, pageSize, onPageChanged }) => {
       <ul className='pagination'>
         {pages.map(page => {
           return (
-            <li key={page} className='page-item'>
+            <li
+              key={page}
+              className={page == currentPage ? 'page-item active' : 'page-item'}
+            >
               <a className='page-link' href='#' onClick={() => onPageChanged(page)}>
                 {page}
               </a>
